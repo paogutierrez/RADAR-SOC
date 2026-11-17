@@ -1,0 +1,36 @@
+{
+  "name": "03_legit_new_device_new_session",
+  "description": "Bob inicia una sesión NUEVA en un dispositivo nuevo con MFA. No hay reutilización.",
+  "expected": {
+    "classification": "none",
+    "alert": false
+  },
+  "events": [
+    {
+      "event_id": "e1",
+      "timestamp": "2026-11-10T10:00:00Z",
+      "source": "identity",
+      "event_type": "login_success",
+      "user": "bob@example.test",
+      "session_id": "S3",
+      "device_id": "dev-new-bob",
+      "ip": "203.0.113.120",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Firefox/131 Windows"
+    },
+    {
+      "event_id": "e2",
+      "timestamp": "2026-11-10T10:00:20Z",
+      "source": "identity",
+      "event_type": "mfa_challenge_passed",
+      "user": "bob@example.test",
+      "session_id": "S3",
+      "device_id": "dev-new-bob",
+      "ip": "203.0.113.120",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Firefox/131 Windows"
+    }
+  ]
+}

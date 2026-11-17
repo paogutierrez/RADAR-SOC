@@ -1,0 +1,56 @@
+{
+  "name": "02_legit_device_switch_with_mfa",
+  "description": "Bob continúa su sesión en su tablet conocida tras pasar MFA. Legítimo.",
+  "expected": {
+    "classification": "anomaly",
+    "alert": false,
+    "signals_include": [
+      "device_mismatch"
+    ],
+    "signals_exclude": [
+      "no_reauth_in_new_context",
+      "unknown_device"
+    ]
+  },
+  "events": [
+    {
+      "event_id": "e1",
+      "timestamp": "2026-11-10T08:00:00Z",
+      "source": "identity",
+      "event_type": "login_success",
+      "user": "bob@example.test",
+      "session_id": "S2",
+      "device_id": "laptop-bob-01",
+      "ip": "203.0.113.10",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows"
+    },
+    {
+      "event_id": "e2",
+      "timestamp": "2026-11-10T08:50:00Z",
+      "source": "identity",
+      "event_type": "mfa_challenge_passed",
+      "user": "bob@example.test",
+      "session_id": "S2",
+      "device_id": "tablet-bob-01",
+      "ip": "203.0.113.90",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Safari/17 iPadOS"
+    },
+    {
+      "event_id": "e3",
+      "timestamp": "2026-11-10T08:52:00Z",
+      "source": "identity",
+      "event_type": "session_use",
+      "user": "bob@example.test",
+      "session_id": "S2",
+      "device_id": "tablet-bob-01",
+      "ip": "203.0.113.90",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Safari/17 iPadOS"
+    }
+  ]
+}

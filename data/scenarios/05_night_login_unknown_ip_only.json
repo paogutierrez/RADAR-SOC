@@ -1,0 +1,23 @@
+{
+  "name": "05_night_login_unknown_ip_only",
+  "description": "Solo un login nocturno desde IP desconocida. Anomalía aislada: no debe alertar.",
+  "expected": {
+    "classification": "none",
+    "alert": false
+  },
+  "events": [
+    {
+      "event_id": "e1",
+      "timestamp": "2026-11-10T03:12:00Z",
+      "source": "identity",
+      "event_type": "login_success",
+      "user": "alice@example.test",
+      "session_id": "S5",
+      "device_id": "dev-unknown-11",
+      "ip": "192.0.2.15",
+      "asn": 64510,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows"
+    }
+  ]
+}

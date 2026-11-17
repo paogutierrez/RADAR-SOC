@@ -1,0 +1,8 @@
+{
+  "users": {
+    "alice@example.test": {"known_devices": ["laptop-alice-01", "phone-alice-01"], "usual_countries": ["CO"]},
+    "bob@example.test":   {"known_devices": ["laptop-bob-01", "tablet-bob-01"],   "usual_countries": ["CO"]}
+  },
+  "corporate_networks": ["198.51.100.0/24"],
+  "corporate_asns": [64500]
+}

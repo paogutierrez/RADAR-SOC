@@ -1,0 +1,51 @@
+{
+  "name": "04_benign_browser_cookie_access_hotspot",
+  "description": "Chrome lee su propio almacén de cookies; cambio a hotspot. Legítimo.",
+  "expected": {
+    "classification": "anomaly",
+    "alert": false,
+    "signals_exclude": [
+      "endpoint_stealer_indicator"
+    ]
+  },
+  "events": [
+    {
+      "event_id": "e1",
+      "timestamp": "2026-11-10T09:00:00Z",
+      "source": "identity",
+      "event_type": "login_success",
+      "user": "alice@example.test",
+      "session_id": "S4",
+      "device_id": "laptop-alice-01",
+      "ip": "203.0.113.10",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows"
+    },
+    {
+      "event_id": "e2",
+      "timestamp": "2026-11-10T09:10:00Z",
+      "source": "endpoint",
+      "event_type": "credential_store_access",
+      "user": "alice@example.test",
+      "device_id": "laptop-alice-01",
+      "process_name": "chrome.exe",
+      "details": {
+        "target_class": "browser_cookie_store"
+      }
+    },
+    {
+      "event_id": "e3",
+      "timestamp": "2026-11-10T10:00:00Z",
+      "source": "identity",
+      "event_type": "session_use",
+      "user": "alice@example.test",
+      "session_id": "S4",
+      "device_id": "laptop-alice-01",
+      "ip": "203.0.113.200",
+      "asn": 64503,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "name": "08_malicious_stealer_session_reuse",
+  "description": "Proceso sin firma lee cookies del navegador; luego la sesión se usa desde otro país y dispositivo.",
+  "expected": {
+    "classification": "strong_suspicion",
+    "alert": true,
+    "signals_include": [
+      "endpoint_stealer_indicator",
+      "suspicious_process",
+      "device_mismatch",
+      "sensitive_resource_access"
+    ]
+  },
+  "events": [
+    {
+      "event_id": "e1",
+      "timestamp": "2026-11-10T09:00:00Z",
+      "source": "identity",
+      "event_type": "login_success",
+      "user": "alice@example.test",
+      "session_id": "S8",
+      "device_id": "laptop-alice-01",
+      "ip": "203.0.113.10",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows"
+    },
+    {
+      "event_id": "e2",
+      "timestamp": "2026-11-10T09:05:00Z",
+      "source": "endpoint",
+      "event_type": "process_start",
+      "user": "alice@example.test",
+      "device_id": "laptop-alice-01",
+      "process_name": "updater_svc.exe",
+      "details": {
+        "signed": false,
+        "path_class": "temp"
+      }
+    },
+    {
+      "event_id": "e3",
+      "timestamp": "2026-11-10T09:06:00Z",
+      "source": "endpoint",
+      "event_type": "credential_store_access",
+      "user": "alice@example.test",
+      "device_id": "laptop-alice-01",
+      "process_name": "updater_svc.exe",
+      "details": {
+        "target_class": "browser_cookie_store"
+      }
+    },
+    {
+      "event_id": "e4",
+      "timestamp": "2026-11-10T09:31:00Z",
+      "source": "identity",
+      "event_type": "session_use",
+      "user": "alice@example.test",
+      "session_id": "S8",
+      "device_id": "dev-unknown-77",
+      "ip": "192.0.2.50",
+      "asn": 64510,
+      "country": "RO",
+      "user_agent": "Firefox/131 Linux"
+    },
+    {
+      "event_id": "e5",
+      "timestamp": "2026-11-10T09:33:00Z",
+      "source": "cloud",
+      "event_type": "resource_access",
+      "user": "alice@example.test",
+      "session_id": "S8",
+      "ip": "192.0.2.50",
+      "asn": 64510,
+      "country": "RO",
+      "user_agent": "Firefox/131 Linux",
+      "resource": "s3://finance-payroll",
+      "resource_sensitivity": "high"
+    }
+  ]
+}

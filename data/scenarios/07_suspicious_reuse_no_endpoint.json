@@ -1,0 +1,59 @@
+{
+  "name": "07_suspicious_reuse_no_endpoint",
+  "description": "Sesión usada desde dispositivo y país nuevos, acceso sensible, sin evidencia de endpoint.",
+  "expected": {
+    "classification": "suspicion",
+    "alert": true,
+    "signals_include": [
+      "device_mismatch",
+      "unknown_device",
+      "network_country_change",
+      "sensitive_resource_access"
+    ],
+    "signals_exclude": [
+      "endpoint_stealer_indicator"
+    ]
+  },
+  "events": [
+    {
+      "event_id": "e1",
+      "timestamp": "2026-11-10T09:00:00Z",
+      "source": "identity",
+      "event_type": "login_success",
+      "user": "alice@example.test",
+      "session_id": "S7",
+      "device_id": "laptop-alice-01",
+      "ip": "203.0.113.10",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows"
+    },
+    {
+      "event_id": "e2",
+      "timestamp": "2026-11-10T09:40:00Z",
+      "source": "identity",
+      "event_type": "session_use",
+      "user": "alice@example.test",
+      "session_id": "S7",
+      "device_id": "dev-unknown-77",
+      "ip": "192.0.2.50",
+      "asn": 64510,
+      "country": "RO",
+      "user_agent": "Firefox/131 Linux"
+    },
+    {
+      "event_id": "e3",
+      "timestamp": "2026-11-10T09:42:00Z",
+      "source": "cloud",
+      "event_type": "resource_access",
+      "user": "alice@example.test",
+      "session_id": "S7",
+      "ip": "192.0.2.50",
+      "asn": 64510,
+      "country": "RO",
+      "user_agent": "Firefox/131 Linux",
+      "resource": "s3://finance-payroll",
+      "resource_sensitivity": "high"
+    }
+  ]
+}

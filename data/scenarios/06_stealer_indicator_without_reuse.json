@@ -1,0 +1,35 @@
+{
+  "name": "06_stealer_indicator_without_reuse",
+  "description": "Proceso raro lee el almacén del navegador pero la sesión no se reutiliza. Sin correlación, sin alerta.",
+  "expected": {
+    "classification": "none",
+    "alert": false
+  },
+  "events": [
+    {
+      "event_id": "e1",
+      "timestamp": "2026-11-10T09:00:00Z",
+      "source": "identity",
+      "event_type": "login_success",
+      "user": "alice@example.test",
+      "session_id": "S6",
+      "device_id": "laptop-alice-01",
+      "ip": "203.0.113.10",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows"
+    },
+    {
+      "event_id": "e2",
+      "timestamp": "2026-11-10T09:30:00Z",
+      "source": "endpoint",
+      "event_type": "credential_store_access",
+      "user": "alice@example.test",
+      "device_id": "laptop-alice-01",
+      "process_name": "svch0st.exe",
+      "details": {
+        "target_class": "browser_cookie_store"
+      }
+    }
+  ]
+}

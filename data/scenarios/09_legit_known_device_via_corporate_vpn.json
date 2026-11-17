@@ -1,0 +1,40 @@
+{
+  "name": "09_legit_known_device_via_corporate_vpn",
+  "description": "Alice usa su teléfono conocido por la VPN corporativa sin MFA nuevo. Bajo riesgo.",
+  "expected": {
+    "classification": "anomaly",
+    "alert": false,
+    "signals_exclude": [
+      "network_country_change",
+      "network_asn_change"
+    ]
+  },
+  "events": [
+    {
+      "event_id": "e1",
+      "timestamp": "2026-11-10T09:00:00Z",
+      "source": "identity",
+      "event_type": "login_success",
+      "user": "alice@example.test",
+      "session_id": "S9",
+      "device_id": "laptop-alice-01",
+      "ip": "203.0.113.10",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows"
+    },
+    {
+      "event_id": "e2",
+      "timestamp": "2026-11-10T12:00:00Z",
+      "source": "identity",
+      "event_type": "session_use",
+      "user": "alice@example.test",
+      "session_id": "S9",
+      "device_id": "phone-alice-01",
+      "ip": "198.51.100.20",
+      "asn": 64500,
+      "country": "CO",
+      "user_agent": "Chrome/130 Android"
+    }
+  ]
+}

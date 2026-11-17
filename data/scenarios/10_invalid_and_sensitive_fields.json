@@ -1,0 +1,58 @@
+{
+  "name": "10_invalid_and_sensitive_fields",
+  "description": "Entrada con datos inválidos y campos prohibidos; verifica validación y redacción.",
+  "expected": {
+    "classification": "none",
+    "alert": false
+  },
+  "events": [
+    {
+      "event_id": "e1",
+      "timestamp": "2026-11-10T09:00:00Z",
+      "source": "identity",
+      "event_type": "login_success",
+      "user": "alice@example.test",
+      "session_id": "S10",
+      "device_id": "laptop-alice-01",
+      "ip": "203.0.113.10",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows"
+    },
+    {
+      "event_id": "bad1",
+      "timestamp": "no-es-fecha",
+      "source": "identity",
+      "event_type": "session_use",
+      "user": "alice@example.test",
+      "session_id": "S10"
+    },
+    {
+      "event_id": "e3",
+      "timestamp": "2026-11-10T09:10:00Z",
+      "source": "identity",
+      "event_type": "session_use",
+      "user": "alice@example.test",
+      "session_id": "S10",
+      "device_id": "laptop-alice-01",
+      "ip": "no-es-ip"
+    },
+    {
+      "event_id": "e4",
+      "timestamp": "2026-11-10T09:20:00Z",
+      "source": "identity",
+      "event_type": "session_use",
+      "user": "alice@example.test",
+      "session_id": "S10",
+      "device_id": "laptop-alice-01",
+      "ip": "203.0.113.10",
+      "asn": 64501,
+      "country": "CO",
+      "user_agent": "Chrome/130 Windows",
+      "session_cookie": "VALOR-SECRETO-NO-REAL",
+      "details": {
+        "auth_token": "XYZ"
+      }
+    }
+  ]
+}
