@@ -54,3 +54,9 @@ def test_anomaly_does_not_create_alert(detector):
 def test_false_positive_hints_are_included(detector):
     alert = _alert_for(detector, "07_")
     assert len(alert["possible_false_positives"]) >= 3
+def test_false_positive_hints_have_no_duplicates(detector):
+    alert = _alert_for(detector, "08_")
+
+    hints = alert["possible_false_positives"]
+
+    assert len(hints) == len(set(hints))
