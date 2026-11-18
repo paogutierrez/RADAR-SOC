@@ -21,3 +21,8 @@ secrets/
 *.log
 .DS_Store
 Thumbs.db
+
+# Archivos generados por RADAR SOC
+alerts.json
+alerts_*.json
+*.egg-info/
