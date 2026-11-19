@@ -11,11 +11,12 @@ def _ids(path):
 
 
 @pytest.mark.parametrize("path", scenario_files(), ids=_ids)
-def test_scenario_matches_expectation(path, detector):
+def test_scenario_matches_expectation(path, detector, privacy_key):
     scenario = load_scenario(path)
     expected = scenario["expected"]
     _, result = analyze_raw(detector, scenario["events"])
-    alerts = alerts_from_findings(result.findings, detector.rule)
+    alerts = alerts_from_findings(result.findings, detector.rule, privacy_key
+)
 
     assert bool(alerts) == expected["alert"], scenario["description"]
     if expected["classification"] == "none":

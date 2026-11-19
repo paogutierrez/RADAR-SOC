@@ -1,4 +1,4 @@
-"""Identity Threat Detection: RADAR-IDENTITY-001.
+﻿"""Identity Threat Detection: RADAR-IDENTITY-001.
 
 Flujo por sesión:
  1. Localizar el evento de ORIGEN (login_success).
@@ -129,11 +129,12 @@ class SessionReuseDetector:
                 f"La sesión creada en el dispositivo '{origin.device_id}' se usó "
                 f"desde '{new_device}'.", 30, "session_context",
                 (origin.event_id,) + dev_ev))
-            if not self.baseline.is_known_device(origin.user, new_device):
+
+        if not self.baseline.is_known_device(origin.user, new_device):
                 out.append(Signal(
                     "unknown_device",
-                    f"El dispositivo '{new_device}' no está en la línea base de "
-                    f"{origin.user}.", 15, "device", dev_ev))
+                    f"El dispositivo '{new_device}' no está registrado en la línea base "
+                    "del usuario.", 15, "device", dev_ev))
         if ua_changed:
             out.append(Signal(
                 "user_agent_change",

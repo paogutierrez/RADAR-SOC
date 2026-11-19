@@ -33,3 +33,8 @@ def detector(baseline):
 def analyze_raw(detector, raw_events):
     norm = normalize_events(raw_events)
     return norm, detector.analyze(norm.events)
+@pytest.fixture
+
+def privacy_key():
+    """Clave ficticia exclusiva para las pruebas automatizadas."""
+    return "radar-soc-test-only-key-2026-32chars-minimum"
